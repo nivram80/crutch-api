@@ -1,6 +1,6 @@
 module Api
   module V1
-    class ProjectsController < ApplicationController
+    class StatesController < ApplicationController
       include ActionController::HttpAuthentication::Token::ControllerMethods
       include ActionController::ImplicitRender
 
@@ -8,38 +8,38 @@ module Api
       respond_to :json
 
       def index
-        respond_with(Project.all.order("created_at DESC"))
+        respond_with(State.all.order("created_at DESC"))
       end
 
       def show
-        respond_with(Project.find(params[:id]))
+        respond_with(State.find(params[:id]))
       end
 
       def create
-        @project = Project.new(projects_params)
-        if @project.save
+        @state = State.new(states_params)
+        if @state.save
           respond_to do |format|
-            format.json { render :json => @project }
+            format.json { render :json => @state }
           end
         end
       end
 
       def update
-        @project = Project.find(params[:id])
-        if @project.update(projects_params)
+        @state = State.find(params[:id])
+        if @state.update(states_params)
           respond_to do |format|
-            format.json { render :json => @project }
+            format.json { render :json => @state }
           end
         end
           end
 
       def destroy
-        respond_with(Project.destroy(params[:id]))
+        respond_with(State.destroy(params[:id]))
       end
 
   private
-      def projects_params
-        params.require(:project).permit(:title)
+      def states_params
+        params.require(:state).permit(:title, :position)
       end
 
       def restrict_access
