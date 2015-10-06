@@ -1,0 +1,25 @@
+# PostgreSQL. Versions 8.2 and up are supported.
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+
+development:
+  <<: *default
+  database: crutch-api_development
+  host: localhost
+  port: 5432
+
+
+test:
+  <<: *default
+  database: crutch-api_test
+
+
+production:
+  <<: *default
+  database: crutch-api_production
+  username: crutch-api
+  password: <%= ENV['CRUTCH-API_DATABASE_PASSWORD'] %>
