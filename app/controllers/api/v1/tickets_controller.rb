@@ -16,7 +16,7 @@ module Api
       end
 
       def create
-        @ticket = Ticket.new(tickets_params)
+        @ticket = Ticket.new(ticket_params)
         if @ticket.save
           respond_to do |format|
             format.json { render :json => @ticket }
@@ -26,19 +26,19 @@ module Api
 
       def update
         @ticket = Ticket.find(params[:id])
-        if @ticket.update(tickets_params)
+        if @ticket.update(ticket_params)
           respond_to do |format|
             format.json { render :json => @ticket }
           end
         end
-          end
+      end
 
       def destroy
         respond_with(Ticket.destroy(params[:id]))
       end
 
   private
-      def tickets_params
+      def ticket_params
         params.require(:ticket).permit(:title, :details, :priority)
       end
 

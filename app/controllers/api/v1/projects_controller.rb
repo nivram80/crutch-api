@@ -16,7 +16,7 @@ module Api
       end
 
       def create
-        @project = Project.new(projects_params)
+        @project = Project.new(project_params)
         if @project.save
           respond_to do |format|
             format.json { render :json => @project }
@@ -26,19 +26,19 @@ module Api
 
       def update
         @project = Project.find(params[:id])
-        if @project.update(projects_params)
+        if @project.update(project_params)
           respond_to do |format|
             format.json { render :json => @project }
           end
         end
-          end
+      end
 
       def destroy
         respond_with(Project.destroy(params[:id]))
       end
 
   private
-      def projects_params
+      def project_params
         params.require(:project).permit(:title)
       end
 

@@ -16,7 +16,7 @@ module Api
       end
 
       def create
-        @state = State.new(states_params)
+        @state = State.new(state_params)
         if @state.save
           respond_to do |format|
             format.json { render :json => @state }
@@ -26,19 +26,19 @@ module Api
 
       def update
         @state = State.find(params[:id])
-        if @state.update(states_params)
+        if @state.update(state_params)
           respond_to do |format|
             format.json { render :json => @state }
           end
         end
-          end
+      end
 
       def destroy
         respond_with(State.destroy(params[:id]))
       end
 
   private
-      def states_params
+      def state_params
         params.require(:state).permit(:title, :position)
       end
 
