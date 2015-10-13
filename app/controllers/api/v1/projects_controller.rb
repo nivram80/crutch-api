@@ -39,7 +39,7 @@ module Api
 
   private
       def project_params
-        params.require(:project).permit(:title)
+        params.require(:project).permit(:title, :description, :client)
       end
 
       def restrict_access
