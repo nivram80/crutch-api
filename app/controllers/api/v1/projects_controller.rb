@@ -21,6 +21,8 @@ module Api
           respond_to do |format|
             format.json { render :json => @project }
           end
+        else
+          render json: @project.errors, status: :unprocessable_entity
         end
       end
 
@@ -30,6 +32,8 @@ module Api
           respond_to do |format|
             format.json { render :json => @project }
           end
+        else
+          render json: @project.errors, status: :unprocessable_entity
         end
       end
 
