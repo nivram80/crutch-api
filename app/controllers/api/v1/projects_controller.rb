@@ -41,9 +41,9 @@ module Api
         respond_with(Project.destroy(params[:id]))
       end
 
-  private
+    private
       def project_params
-        params.require(:project).permit(:title, :description, :client)
+        params.permit(:title, :description, :client)
       end
 
       def restrict_access

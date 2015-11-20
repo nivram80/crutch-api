@@ -8,7 +8,7 @@ module Api
       respond_to :json
 
       def index
-        respond_with(State.all.order("created_at DESC"))
+        respond_with(State.all.order("position ASC"))
       end
 
       def show

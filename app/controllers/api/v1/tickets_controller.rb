@@ -21,15 +21,20 @@ module Api
           respond_to do |format|
             format.json { render :json => @ticket }
           end
+        else
+          render json: @ticket.errors, status: :unprocessable_entity
         end
       end
 
       def update
         @ticket = Ticket.find(params[:id])
         if @ticket.update(ticket_params)
+          @ticket.change_priority
           respond_to do |format|
             format.json { render :json => @ticket }
           end
+        else
+          render json: @ticket.errors, status: :unprocessable_entity
         end
       end
 
@@ -39,7 +44,7 @@ module Api
 
   private
       def ticket_params
-        params.require(:ticket).permit(:title, :details, :priority)
+        params.permit(:title, :details, :priority, :project_id, :state_id, :id, :updated_at, :created_at, :previous_state_id)
       end
 
       def restrict_access
